@@ -1,10 +1,12 @@
 package app.tracklive.tracklivedroid
 
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
+import app.tracklive.tracklivedroid.R.id.map
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -12,6 +14,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
@@ -33,7 +36,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        // TODO: make fusedLocationClient work, and then uncomment
          fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
@@ -52,20 +54,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         map.getUiSettings().setZoomControlsEnabled(true)
         map.setOnMarkerClickListener(this)
         setUpMap()
-
-        // 1
-        map.isMyLocationEnabled = true
-
-        // 2
-        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
-            // Got last known location. In some rare situations this can be null.
-            // 3
-            if (location != null) {
-                lastLocation = location
-                val currentLatLng = LatLng(location.latitude, location.longitude)
-                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
-            }
-        }
     }
 
     companion object {
@@ -79,7 +67,33 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_PERMISSION_REQUEST_CODE)
             return
         }
+
+        map.isMyLocationEnabled = true
+
+        //used to switch between map types
+        //map.mapType = GoogleMap.MAP_TYPE_TERRAIN
+
+        // is triggered only first time, not on every location update. TODO: call below on location update
+        fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
+            // Got last known location. In some rare situations this can be null.
+            if (location != null) {
+                lastLocation = location
+                val currentLatLng = LatLng(location.latitude, location.longitude)
+                placeMarkerOnMap(currentLatLng)
+                map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+            }
+        }
     }
+
+    private fun placeMarkerOnMap(location: LatLng) {
+        val markerOptions = MarkerOptions().position(location)
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(
+                BitmapFactory.decodeResource(resources, R.mipmap.ic_user_location)))
+
+
+        map.addMarker(markerOptions)
+    }
+
 
 
 }
