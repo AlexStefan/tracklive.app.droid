@@ -90,10 +90,6 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(
                 BitmapFactory.decodeResource(resources, R.mipmap.ic_user_location)))
 
-
         map.addMarker(markerOptions)
     }
-
-
-
 }
