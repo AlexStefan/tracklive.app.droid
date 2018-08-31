@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TrackLive.Droid</string>
     <string name="title_activity_map">Map</string>
+    <string name="title_activity_main">MainActivity</string>
+
+    <!-- strings -->
+    <string name="start_broadcast">Broadcast</string>
+    <string name="stop_broadcast">Stop Broadcast</string>
 </resources>
