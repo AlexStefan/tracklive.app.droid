@@ -20,7 +20,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main" />
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_broadcast"
+        android:layout_gravity="bottom"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

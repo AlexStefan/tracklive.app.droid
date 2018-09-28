@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/toast_layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_marginTop="100dp"
+    android:layout_marginBottom="100dp"
+    android:orientation="vertical"
+    android:layout_marginLeft="70dp"
+    android:layout_marginRight="70dp"
+    android:background="#fff" >
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:text="@string/ask"
+        android:textColor="#000"
+        android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/textSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="10dp"
+        android:text="@string/ask_small"
+        android:textColor="#757575"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/track"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="20dp"
+        android:background="#009688"
+        android:textSize="18sp"
+        android:textColor="#fff"
+        android:text="TRACK"/>
+
+    <Button
+        android:id="@+id/track_share"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:background="@layout/my_button_bg"
+        android:text="TRACK AND START SHARING"/>
+
+    <Button
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_gravity="right"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:background="#fff"
+        android:text="CANCEL"/>
+</LinearLayout>

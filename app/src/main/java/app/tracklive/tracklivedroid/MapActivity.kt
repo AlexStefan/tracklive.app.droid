@@ -6,7 +6,10 @@ import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
-import app.tracklive.tracklivedroid.R.id.map
+import android.support.v7.app.AlertDialog
+import android.view.LayoutInflater
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
@@ -18,6 +21,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.activity_map.*
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener  {
 
@@ -82,6 +86,29 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                 placeMarkerOnMap(currentLatLng)
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
             }
+        }
+
+        val colors = arrayOf(
+                "Red","Green","Blue","Maroon","Magenta",
+                "Gold","GreenYellow","Yellow","Radish"
+        )
+        val adapter = ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_dropdown_item_1line,
+                colors
+        )
+
+        edit_text.setAdapter(adapter)
+        edit_text.threshold = 2
+        edit_text.onItemClickListener = AdapterView.OnItemClickListener{
+            parent,view,position,id->
+
+            val layout = LayoutInflater.from(this).inflate(R.layout.custom_dialog, null)
+            val mBuilder = AlertDialog.Builder(this)
+                    .setView(layout)
+            mBuilder.setCancelable(false)
+            val mAlertDialog = mBuilder.show()
+
         }
     }
 
