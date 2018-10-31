@@ -10,7 +10,6 @@ import android.location.Location
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
-import app.tracklive.tracklivedroid.R.id.map
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -27,12 +26,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import app.tracklive.tracklivedroid.R.id.edit_text
+import app.tracklive.tracklivedroid.R.id.map
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
-import kotlinx.android.synthetic.main.activity_map.*
+import io.ably.lib.realtime.AblyRealtime
+
 import java.io.IOException
-import java.util.*
-import java.util.concurrent.Delayed
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener  {
 
@@ -69,6 +69,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
             }
         }
 
+        val a = AblyRealtime("")
+        val channel = a.channels.get("test")
+
+        //TODO: make ably receive messages
+        /*
+        var listener = MessageListener() {
+            @Override
+            public void onMessage(Message message) {
+                System.out.print(message.data);
+            }};
+    };
+
+        channel.subscribe("test", listener)
+
+*/
         createLocationRequest()
     }
 
