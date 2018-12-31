@@ -24,6 +24,7 @@ import android.location.Geocoder
 import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import app.tracklive.tracklivedroid.R.id.edit_text
@@ -31,6 +32,7 @@ import app.tracklive.tracklivedroid.R.id.map
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
 import io.ably.lib.realtime.AblyRealtime
+import kotlinx.android.synthetic.main.activity_map.*
 
 import java.io.IOException
 
@@ -44,6 +46,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
     private lateinit var locationCallback: LocationCallback
     private lateinit var locationRequest: LocationRequest
     private var locationUpdateState = false
+    private var shareLocation = false
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1
@@ -208,6 +211,21 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerC
                     .setView(layout)
             mBuilder.setCancelable(false)
             val mAlertDialog = mBuilder.show()
+        }
+
+        share.setOnClickListener {
+            if(shareLocation == false) {
+                shareLocation = true
+                track_code.visibility = View.VISIBLE
+                share.setBackgroundColor(getColor(R.color.stopShareLoc))
+                share.text = getString(R.string.stop_share)
+            }
+            else {
+                shareLocation = false
+                track_code.visibility = View.GONE
+                share.setBackgroundColor(getColor(R.color.startShareLoc))
+                share.text = getString(R.string.start_share)
+            }
         }
 
         // TODO: thi is mockup to move markers on map, proper service should be made

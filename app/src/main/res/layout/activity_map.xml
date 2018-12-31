@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         tools:context=".MapActivity" />
     <RelativeLayout
+        android:id="@+id/up"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#fff"
@@ -36,14 +37,33 @@
             android:textColor="#000"
             android:textSize="20sp"/>
     </RelativeLayout>
-    <Button
-        android:id="@+id/share"
+    <RelativeLayout
+        android:id="@+id/down"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="7dp"
-        android:background="#009688"
-        android:textSize="18sp"
-        android:textColor="#fff"
-        android:text="@string/start_share"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/share"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6pt"
+            android:layout_marginRight="6pt"
+            android:layout_marginBottom="2pt"
+            android:background="@color/startShareLoc"
+            android:textSize="18sp"
+            android:textColor="#fff"
+            android:layout_alignParentStart="true"
+            android:text="@string/start_share"
+            />
+        <TextView
+            android:id="@+id/track_code"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:padding="15dp"
+            android:text="Your tracking code:"
+            android:textColor="#000"
+            android:layout_below="@id/share"
+            android:visibility="gone"/>
+    </RelativeLayout>
 </RelativeLayout>
